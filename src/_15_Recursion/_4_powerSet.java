@@ -48,4 +48,21 @@ public class _4_powerSet {
         selectedSoFar.remove(selectedSoFar.size() - 1);
         directedPowerSet(inputSet, toBeSelected + 1, selectedSoFar, powerSet);
     }
+
+    static class Solution2 {
+        /**
+         * enumerate the integers in [0, 2^n - 1] and examine the indices of bits set.
+         * ex: {a,b,c,d}, <1,0,1,1>
+         * These indices are determined bny isolating the lowest set bit.
+         * y = x & ~(x - 1). Then get the index by computing lgy.
+         */
+
+        private static final double LOG_2 = Math.log(2);
+
+        public static List<List<Integer>> generatePowerSet(List<Integer> inputSet) {
+            List<List<Integer>> powerSet = new ArrayList<>();
+            for (int intForSubset = 0; intForSubset < (1 << inputSet.size()));
+        }
+
+    }
 }
