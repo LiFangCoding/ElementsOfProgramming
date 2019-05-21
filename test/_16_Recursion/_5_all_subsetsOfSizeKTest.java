@@ -1,10 +1,8 @@
-package _15_Recursion;
+package _16_Recursion;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class _5_all_subsetsOfSizeKTest {
 

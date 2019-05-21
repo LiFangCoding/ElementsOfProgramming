@@ -1,6 +1,4 @@
-package _15_Recursion;
-
-import static org.junit.jupiter.api.Assertions.*;
+package _16_Recursion;
 
 class _1_HanoiTowerTest {
 
