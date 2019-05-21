@@ -55,14 +55,22 @@ public class _4_powerSet {
          * ex: {a,b,c,d}, <1,0,1,1>
          * These indices are determined bny isolating the lowest set bit.
          * y = x & ~(x - 1). Then get the index by computing lgy.
+         * Each set takes O(n) time. The time complexity is O(n * 2^n).
          */
-
         private static final double LOG_2 = Math.log(2);
 
         public static List<List<Integer>> generatePowerSet(List<Integer> inputSet) {
             List<List<Integer>> powerSet = new ArrayList<>();
-            for (int intForSubset = 0; intForSubset < (1 << inputSet.size()));
+            for (int intForSubset = 0; intForSubset < (1 << inputSet.size()); intForSubset++) {
+                int bitArray = intForSubset;
+                List<Integer> subset = new ArrayList<>();
+                while (bitArray != 0) {
+                    subset.add((int) (Math.log(bitArray & ~(bitArray - 1)) / LOG_2));
+                    bitArray &= bitArray - 1;
+                }
+                powerSet.add(subset);
+            }
+            return powerSet;
         }
-
     }
 }
