@@ -59,7 +59,7 @@ public class _3_permutations {
             Collections.sort(A);
             do {
                 res.add(new ArrayList<>(A));
-                A = NextPermutation.nextPermutation(A);
+                //A = NextPermutation.nextPermutation(A);
             } while (!A.isEmpty());
 
             return res;
