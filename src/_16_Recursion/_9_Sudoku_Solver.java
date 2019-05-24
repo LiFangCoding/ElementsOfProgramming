@@ -56,8 +56,8 @@ public class _9_Sudoku_Solver {
 
             // Undo assignment
             partialAssignment.get(i).set(j, EMPTY_ENTRY);
-            return false;
         }
+        return false;
     }
 
     private static boolean validToaddVal(List<List<Integer>> partialAssignment, int i, int j, int val) {
