@@ -21,6 +21,10 @@ public class _3_lowestCommonAncestor {
      * The int filed is 0, 1, 2, depending on how many of {node0, node1} are present
      * in the tree. If both are present in the tree, when ancestor is assigned to
      * a non-null value, it is the LCA.
+     *
+     * The algorithm is similar to a recursive postorder traversal.
+     * T = O(n)
+     * S = O(h)
      */
     private static Status LCAHelper(TreeNode tree, TreeNode node0, TreeNode node1) {
         if (tree == null) {
