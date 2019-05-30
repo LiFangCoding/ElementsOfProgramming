@@ -5,6 +5,7 @@ public class TreeNode {
     public TreeNode left;
     public TreeNode right;
     public TreeNode parent;
+    public int size;
 
     public TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
