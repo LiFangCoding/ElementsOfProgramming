@@ -18,7 +18,7 @@ public class _9_Sudoku_Solver {
      */
     private static final int EMPTY_ENTRY = 0;
 
-    public static boolean solveSudoku(List<List<Integer> partialAssignment) {
+    public static boolean solveSudoku(List<List<Integer>> partialAssignment) {
         return solvePartialSudoku(0, 0, partialAssignment);
     }
 
@@ -26,7 +26,7 @@ public class _9_Sudoku_Solver {
      * Because the program is specialized to 9 * 9 grids,
      * it does not make sense to speak of complexity.
      */
-    private static boolean solvePartialSudoku(int i, int j, List<List<Integer> partialAssignment) {
+    private static boolean solvePartialSudoku(int i, int j, List<List<Integer>> partialAssignment) {
         if (i == partialAssignment.size()) {
             // Starts a new row.
             i = 0;
