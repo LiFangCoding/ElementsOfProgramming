@@ -6,7 +6,7 @@ import common.TreeNode;
  * The lowest common ancestor(LCA) of any two nodes in a binary tree is the node
  * furtheset from the root that is an ancestor of both nodes.
  * Computing LCA has important applications.
- * REndersing webpages, CSS to a DOM element.
+ * Rendering webpages, CSS to a DOM element.
  * <p>
  * Design an algorithm for computing the LCA of two nodes in a binary tree
  * in which nodes do not have a parent filed.
@@ -21,7 +21,7 @@ public class _3_lowestCommonAncestor {
      * The int filed is 0, 1, 2, depending on how many of {node0, node1} are present
      * in the tree. If both are present in the tree, when ancestor is assigned to
      * a non-null value, it is the LCA.
-     *
+     * <p>
      * The algorithm is similar to a recursive postorder traversal.
      * T = O(n)
      * S = O(h)

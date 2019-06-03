@@ -31,7 +31,7 @@ public class _11_ComputeDiameterOfATree {
         double[] heights = {0.0, 0.0};
         for (Edge e : r.edges) {
             HeightAndDiameter heightDiameter = computeHeightAndDiameter(e.root);
-            double heightSubtree = heightDiameter.height + e.length
+            double heightSubtree = heightDiameter.height + e.length;
             if (heightSubtree > heights[0]) {
                 heights[1] = heights[0];
                 heights[0] = heightSubtree;
