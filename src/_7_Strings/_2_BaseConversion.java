@@ -26,7 +26,6 @@ public class _2_BaseConversion {
         return convertBaseToString(intVal, b2);
     }
 
-    // This is positive
     private static String convertBaseToString(int intVal, int b2) {
         StringBuilder sb = new StringBuilder();
         boolean isNeg = false;
@@ -36,11 +35,8 @@ public class _2_BaseConversion {
         }
 
         while (intVal != 0) {
-            int intdigit = intVal % b2;
-            if (isNeg) {
-                intdigit = -1 * intdigit;
-            }
-
+            // positive value
+            int intdigit = Math.abs(intVal % b2);
             char chardigit = intdigit < 10 ? (char) ('0' + intdigit) : (char) ('A' + (intdigit - 10));
             sb.append(chardigit);
             intVal /= b2;
@@ -66,10 +62,8 @@ public class _2_BaseConversion {
                 digit = digitChar - 'A' + 10;
             }
 
-            if (isNegative) {
-                digit = -1 * digit;
-            }
-
+            // become negative if it is negative
+            digit = isNegative ? -1 * digit : digit;
             numAsInt = numAsInt * b1 + digit;
         }
 
