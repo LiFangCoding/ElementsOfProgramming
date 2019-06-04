@@ -61,7 +61,7 @@ public class _1_MergeSortedFiles {
             ArrayEntry headEntry = minHeap.poll();
             res.add(headEntry.value);
             if (iters.get(headEntry.arrayId).hasNext()) {
-                minHeap.add(new ArrayEntry(iters.get(headEntry.arrayId).next(), headEntry.arrayId);
+                minHeap.add(new ArrayEntry(iters.get(headEntry.arrayId).next(), headEntry.arrayId));
             }
         }
         return res;
