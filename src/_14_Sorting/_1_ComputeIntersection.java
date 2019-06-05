@@ -22,9 +22,10 @@ public class _1_ComputeIntersection {
      * The brute force algorithm is a "loop in". traverse all elements of one array and comparing them to the elements of the other array.
      * m, n be the lengths of the two input arrays. T = O(m * n)
      * Since both arrays are sorted, we can make some optimizations.
+     *
+     * First, we can iterate through the first array and use binary search in array to test if the element is present in the second array.
      */
 
-    // First, we can iterate through the first array and use binary search in array to test if the element is present in the second array.
     static class BinarySearchSol {
         /**
          * A: [2, 3, 8] B: [2,3, 3, 5, 6]
@@ -45,6 +46,48 @@ public class _1_ComputeIntersection {
         }
     }
 
-    //TODO: another solution
+    /**
+     * Above one solution is best if one set is much smaller than the other.
+     * But it is not the best when array lengths are similar. Because we are not exploiting the fact that both
+     * arrays are sorted.
+     * <p>
+     * We can achieve linear runtime by advancing throught the two input arrays in increasing order.
+     */
+    public static class Advance2ArraysSol {
+        /**
+         * A:[2, 3, 8] B: [2,3,3,5,6]
+         * res: [2, 3]
+         * T = O(m + n)
+         */
+        public static List<Integer> intersectTwoSortedArrays(List<Integer> A, List<Integer> B) {
+            List<Integer> res = new ArrayList<>();
+
+            int left = 0;
+            int right = 0;
+
+            while (left < A.size() && right < B.size()) {
+                if (left != 0 && A.get(left) == A.get(left - 1)) {
+                    left++;
+                    continue;
+                }
+
+                if (right != 0 && B.get(right) == B.get(right - 1)) {
+                    right++;
+                    continue;
+                }
+
+                if (A.get(left) == B.get(right)) {
+                    res.add(A.get(left));
+                    left++;
+                    right++;
+                } else if (A.get(left) < B.get(right)) {
+                    left++;
+                } else {
+                    right++;
+                }
+            }
+            return res;
+        }
+    }
 
 }
