@@ -16,4 +16,14 @@ class _3_permutationsTest {
 
         System.out.println(_3_permutations.permutations(A));
     }
+
+    @Test
+    void permutationsDup() {
+        List<Integer> A = new ArrayList<>();
+        A.add(3);
+        A.add(3);
+        A.add(5);
+
+        System.out.println(_3_permutations.permutations(A));
+    }
 }

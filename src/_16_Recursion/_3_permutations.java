@@ -35,6 +35,9 @@ public class _3_permutations {
 
         // Try every possibility for A[i].
         for (int j = i; j < A.size(); j++) {
+            if (j != i && A.get(j) == A.get(j - 1)) {
+                continue;
+            }
             Collections.swap(A, i , j);
             //Generate all permutations for A.subList(i + 1, A.size())
             directedPermutations(A, i + 1, res);

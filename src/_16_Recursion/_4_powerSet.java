@@ -19,37 +19,67 @@ public class _4_powerSet {
      * One is all subsets V that include that element.
      * res is U & V.
      */
-    public static List<List<Integer>> generatePowerSet(List<Integer> inputSet) {
-        List<List<Integer>> powerSet = new ArrayList<>();
-        directedPowerSet(inputSet, 0, new ArrayList<Integer>(), powerSet);
-        return powerSet;
-    }
 
-    /**
-     * The number of calls are C(n) = 2C(n - 1), which is O(2^n)
-     * Spend O(n) time within a call.
-     * T = (n * 2 ^ n)
-     * Generate all subsets whose intersection with inputSet[0], ..
-     * InputSet[toBeSelected - 1] is exactly selectedSoFar.
-     */
-    private static void directedPowerSet(List<Integer> inputSet,
-                                         int toBeSelected, List<Integer> selectedSoFar,
-                                         List<List<Integer>> powerSet) {
-        if (toBeSelected == inputSet.size()) {
-            powerSet.add(new ArrayList<>(selectedSoFar));
-            return;
+    static class DirectSol {
+        public static List<List<Integer>> generatePowerSet(List<Integer> inputSet) {
+            List<List<Integer>> powerSet = new ArrayList<>();
+            directedPowerSet(inputSet, 0, new ArrayList<Integer>(), powerSet);
+            return powerSet;
         }
 
-        //Generate all subsets that contain inputSet[ToBeSelected].
-        selectedSoFar.add(inputSet.get(toBeSelected));
-        directedPowerSet(inputSet, toBeSelected + 1, selectedSoFar, powerSet);
+        /**
+         * The number of calls are C(n) = 2C(n - 1), which is O(2^n)
+         * Spend O(n) time within a call.
+         * T = (n * 2 ^ n)
+         * Generate all subsets whose intersection with inputSet[0], ..
+         * InputSet[toBeSelected - 1] is exactly selectedSoFar.
+         */
+        private static void directedPowerSet(List<Integer> inputSet,
+                                             int offset, List<Integer> selectedSoFar,
+                                             List<List<Integer>> powerSet) {
+            if (offset == inputSet.size()) {
+                powerSet.add(new ArrayList<>(selectedSoFar));
+                return;
+            }
 
-        // Generate all subsets that do not contain inputSet[toBeSelected]
-        selectedSoFar.remove(selectedSoFar.size() - 1);
-        directedPowerSet(inputSet, toBeSelected + 1, selectedSoFar, powerSet);
+            //Generate all subsets that contain inputSet[ToBeSelected].
+            selectedSoFar.add(inputSet.get(offset));
+            directedPowerSet(inputSet, offset + 1, selectedSoFar, powerSet);
+
+            // Generate all subsets that do not contain inputSet[toBeSelected]
+            selectedSoFar.remove(selectedSoFar.size() - 1);
+            directedPowerSet(inputSet, offset + 1, selectedSoFar, powerSet);
+        }
     }
 
-    static class Solution2 {
+    static class RecurSol {
+        public static List<List<Integer>> generatePowerSet(List<Integer> inputSet) {
+            List<List<Integer>> powerSet = new ArrayList<>();
+            recursionPowerSet(inputSet, 0, new ArrayList<Integer>(), powerSet);
+            return powerSet;
+        }
+
+        /**
+         * add all powerset starting with index to the res.
+         */
+        private static void recursionPowerSet(List<Integer> inputSet,
+                                              int offset, List<Integer> selectedSoFar,
+                                              List<List<Integer>> res) {
+            res.add(new ArrayList<>(selectedSoFar));
+
+            for (int i = offset; i < inputSet.size(); i++) {
+                if (i != offset && inputSet.get(i) == inputSet.get(i - 1)) {
+                    continue;
+                }
+                selectedSoFar.add(inputSet.get(i));
+                // can only add number start after i
+                recursionPowerSet(inputSet, i + 1, selectedSoFar, res);
+                selectedSoFar.remove(selectedSoFar.size() - 1);
+            }
+        }
+    }
+
+    static class BitSol {
         /**
          * enumerate the integers in [0, 2^n - 1] and examine the indices of bits set.
          * ex: {a,b,c,d}, <1,0,1,1>

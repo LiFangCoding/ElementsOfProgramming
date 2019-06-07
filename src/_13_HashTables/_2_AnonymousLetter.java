@@ -10,7 +10,6 @@ import java.util.Map;
  */
 public class _2_AnonymousLetter {
     // Hint: count the number of distinct characters appearing in the letter.
-
     /**
      * A better approach is to make a single pass over the letter, storing the character counts for the letter in a
      * single hash table - keys are characters, and values are the number of time that character appears.
