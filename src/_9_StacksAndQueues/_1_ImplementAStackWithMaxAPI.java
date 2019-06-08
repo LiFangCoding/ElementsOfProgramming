@@ -42,8 +42,10 @@ public class _1_ImplementAStackWithMaxAPI {
             }
         }
 
-        // all methods T = O(1)
-        // S = O(n)
+        /**
+         * all methods T = O(1)
+         * S = O(n)
+         */
         public static class Stack {
             // Stores (element, cached maximum) pair.
             private Deque<ElementWithCachedMax> elementWithCachedMaxes = new LinkedList<>();
