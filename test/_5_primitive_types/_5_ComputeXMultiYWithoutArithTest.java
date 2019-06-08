@@ -1,6 +1,5 @@
-package _4_primitive_types;
+package _5_primitive_types;
 
-import _4_primitive_types._5_ComputeXMultiYWithoutArith;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
