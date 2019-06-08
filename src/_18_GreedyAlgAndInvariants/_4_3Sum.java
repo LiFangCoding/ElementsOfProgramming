@@ -15,6 +15,8 @@ public class _4_3Sum {
      * The invariant is that if two elements which sum to the desired value exist, they must lie within the subarray currently under considertaion.
      * <p>
      * For <2,3,5,7,11>, for A[0] = 2, if A[0] + A[j] + A[k] = 21, we search for two entries that add up to 21 - 2 = 19.
+     * T = O(n ^ 2)
+     * S = O(1)
      */
     public static boolean hasThreeSum(List<Integer> A, int t) {
         Collections.sort(A);
@@ -31,7 +33,8 @@ public class _4_3Sum {
         int i = 0;
         int j = A.size() - 1;
 
-        while (i < j) {
+        // because can choose same one, so it can ==.
+        while (i <= j) {
             int sum = A.get(i) + A.get(j);
             if (sum == t) {
                 return true;
