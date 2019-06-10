@@ -1,5 +1,7 @@
 package _19_Graphs;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -16,6 +18,40 @@ public class _7_TransformOneStringToAnother {
     // Hint: Treat strigns as vertices in an undirected graph, with an edge between u and v if and only if the corresponding strings
     // differ in one character.
 
+    // Uses BFS to find the least steps of transformation
+    public static int transformstring(Set<String> D, String s, String t) {
+        Queue<StringWithDistance> q = new LinkedList<>();
+
+        // Marks s as visited by erasing it in D
+        D.remove(s);
+        q.add(new StringWithDistance(s, 0));
+
+        StringWithDistance f;
+        while ((f = q.poll()) != null) {
+            // returns if we find a match
+            if (f.candidateString.equals(t)) {
+                // Number of steps reaches it
+                return f.distance;
+            }
+
+            // tries all possible transformations of f.first
+            String str = f.candidateString;
+            for (int i = 0; i < str.length(); i++) {
+                String strStart = i == 0 ? "" : str.substring(0, i);
+                String strEnd = i + 1 < str.length() ? str.substring(i + 1) : "";
+                for (int j = 0; j < 26; j++) {
+                    String modStr = strStart + (char) ('a' + j) + strEnd;
+                    if (D.remove(modStr)) {
+                        q.add(new StringWithDistance(modStr, f.distance + 1));
+                    }
+                }
+            }
+        }
+
+        // cannot find a possible transformations.
+        return -1;
+    }
+
     /**
      * A brute-force approach may be to explore all strings that differ in one character from the starting string,
      * then two characters from starting string,etc. The problem with this approach is that it may explore lots of strings that
@@ -30,8 +66,19 @@ public class _7_TransformOneStringToAnother {
      * <p>
      * A production sequence is simply a path in G, so what we need is a shortest path from s to t in G.
      * Use BFS.
+     * <p>
+     * The number of vertices is the number d of words in the dictionary. The number of edges is, in  the worst-case, O(d^2).
+     * The time complexity of BFS T= O(d + d ^ 2)
+     * If the string length n is less than d, then the maximum number of edges out of a vertex is O(n), implying O(n *dd) bound.
      */
 
-    public static int transformstring(Set<String> D, String s, String t) {
+    private static class StringWithDistance {
+        public String candidateString;
+        public Integer distance;
+
+        public StringWithDistance(String candidateString, Integer distance) {
+            this.candidateString = candidateString;
+            this.distance = distance;
+        }
     }
 }
