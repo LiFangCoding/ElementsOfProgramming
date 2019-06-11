@@ -13,7 +13,6 @@ import java.util.Queue;
  */
 public class _3_ComputeEnclosedRegions {
     // Hint: It is easier to compute complement of the desired result.
-
     /**
      * It is easier to focus on the inverse problem, namely idetifying Ws that can reach the boundary.
      * The reason that inverse is simpler is that if a W is adjacent to a W that is can reach the boundary,
@@ -31,45 +30,47 @@ public class _3_ComputeEnclosedRegions {
         }
 
         int size = board.size();
-        List<List<Boolean>> visisted = new ArrayList<>(board.size());
-        for (List<Boolean> list : visisted) {
-            for (Boolean b : list) {
-                b = false;
+        List<List<Boolean>> visited = new ArrayList<>(board.size());
+
+        for (int i = 0; i < size; i++) {
+            List<Boolean> temp = new ArrayList<>();
+            for (int j = 0; j < board.get(i).size(); j++) {
+                temp.add(false);
             }
+            visited.add(temp);
         }
 
         // Identifies the regions that are reachable via white path starting from the first or last columns.
         for (int i = 0; i < board.size(); i++) {
-            if (board.get(i).get(0) == 'W' && !visisted.get(i).get(0)) {
-                markBoundaryRegion(i, 0, board, visisted);
+            if (board.get(i).get(0) == 'W' && !visited.get(i).get(0)) {
+                markBoundaryRegion(i, 0, board, visited);
             }
 
-            if (board.get(i).get(size - 1) == 'w' && !visisted.get(i).get(size - 1)) {
-                markBoundaryRegion(i, size - 1, board, visisted);
+            if (board.get(i).get(size - 1) == 'w' && !visited.get(i).get(size - 1)) {
+                markBoundaryRegion(i, size - 1, board, visited);
             }
         }
 
 
         // Identifies the regions that are reachable via white path starting from the first or last rows.
         for (int j = 0; j < board.get(0).size(); j++) {
-            if (board.get(0).get(j) == 'W' && !visisted.get(0).get(j)) {
-                markBoundaryRegion(0, j, board, visisted);
+            if (board.get(0).get(j) == 'W' && !visited.get(0).get(j)) {
+                markBoundaryRegion(0, j, board, visited);
             }
 
-            if (board.get(size - 1).get(j) == 'W' && !visisted.get(size - 1).get(j)) {
-                markBoundaryRegion(size - 1, j, board, visisted);
+            if (board.get(size - 1).get(j) == 'W' && !visited.get(size - 1).get(j)) {
+                markBoundaryRegion(size - 1, j, board, visited);
             }
         }
 
         // Mark the surrounded white regions as black.
         for (int i = 1; i < size - 1; i++) {
             for (int j = 1; j < size - 1; j++) {
-                if (board.get(i).get(j) == 'W' && !visisted.get(i).get(j)) {
+                if (board.get(i).get(j) == 'W' && !visited.get(i).get(j)) {
                     board.get(i).set(j, 'B');
                 }
             }
         }
-
     }
 
     private static void markBoundaryRegion(int i, int j, List<List<Character>> board, List<List<Boolean>> visited) {
@@ -92,7 +93,6 @@ public class _3_ComputeEnclosedRegions {
                 }
             }
         }
-
     }
 
     private static class Coordinate {
