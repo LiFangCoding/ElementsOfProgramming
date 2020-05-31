@@ -43,6 +43,7 @@ public class _1_TestBinaryTreeHeightBalanced {
         return new BalancedStatusWithHeight(isBalanced, height);
     }
 
+
     /**
      * Hint: Think of a classic binary tree algorithm.
      */
